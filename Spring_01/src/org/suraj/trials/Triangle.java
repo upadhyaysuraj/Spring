@@ -12,7 +12,23 @@ public class Triangle
 	
 	public Triangle()
 	{
-		System.out.println("Triangle obj made!");
+		System.out.println("Triangle obj made using no-arg constructor!");
+	}
+	
+	public Triangle(int x)
+	{
+		this.x = x; 
+		this.y = 0;
+		
+		System.out.println("Triangle obj made using 1-arg constructor!");
+	}
+	
+	public Triangle(int x, int y)
+	{
+		this.x = x; 
+		this.y = y;
+		
+		System.out.println("Triangle obj made using 2-arg constructor!");
 	}
 	
 	public void draw()
@@ -38,5 +54,11 @@ public class Triangle
 	public void setY(int y)
 	{
 		this.y = y;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Tri: [x:" + this.x + ", y:" + this.y + "]";
 	}
 }

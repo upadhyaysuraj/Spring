@@ -10,15 +10,19 @@ public class SpringDemo
 	{
 		ApplicationContext myFactory = new ClassPathXmlApplicationContext("spring.xml");
 
-		Triangle t = (Triangle) (myFactory.getBean("tri"));
-		t.draw();
-		t.setX(400);
-		System.out.println(t.getX());
+		Triangle t1 = (Triangle) (myFactory.getBean("tri-def_const"));
+		System.out.println(t1);
 		
+		Triangle t2 = (Triangle) (myFactory.getBean("tri-1_arg_const"));
+		System.out.println(t2);
 		
+		Triangle t3 = (Triangle) (myFactory.getBean("tri-2_arg_const"));
+		System.out.println(t3);
+		
+		/*
 		threading(myFactory).start();
 		threading(myFactory).start();
-		
+		*/
 		
 		((ClassPathXmlApplicationContext)myFactory).close();
 	}

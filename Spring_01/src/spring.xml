@@ -2,10 +2,18 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans>
-	<bean id = "tri" class = "org.suraj.trials.Triangle" scope="prototype">
-    <property name="x" value = "100"> </property>
-	<property name="y" value = "3"></property>
+	<bean id = "tri-def_const" class = "org.suraj.trials.Triangle" scope="prototype">
+	    <property name="x" value = "100"> </property>
+		<property name="y" value = "3"></property>
+	</bean>
 	
+	<bean id = "tri-1_arg_const" class = "org.suraj.trials.Triangle" scope="prototype">
+		<constructor-arg value="200"/>
+	</bean>
+	
+	<bean id = "tri-2_arg_const" class = "org.suraj.trials.Triangle" scope="prototype">
+		<constructor-arg index="1" value="200"/>
+		<constructor-arg index="0" value="600"/>
 	</bean>
 	
 </beans>
