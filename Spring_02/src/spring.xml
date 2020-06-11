@@ -18,7 +18,7 @@
 		</property>
 	</bean>
 
-	<bean id="zeroPoint" class="org.suraj.model.Point" scope="prototype">
+	<bean id="zeroPoint" class="org.suraj.model.Point">
 		<property name="x" value="0"/>
 		<property name="y" value="0"/>
 	</bean>

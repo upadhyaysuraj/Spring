@@ -18,11 +18,15 @@ public class SpringDemo
 		Triangle t2 = (Triangle) (myFactory.getBean("tri-alias_1"));
 		System.out.println(t2);
 		
+		t1.getP1().setX(5);
+		
 		Triangle t3 = (Triangle) (myFactory.getBean("tri-alias_2"));
 		System.out.println(t3);
 		
 		TrianglePointList t4 = (TrianglePointList) (myFactory.getBean("tri-point-list"));
 		System.out.println(t4);
+		
+		System.out.println(t2);
 		
 		((ClassPathXmlApplicationContext)myFactory).close();
 	}
