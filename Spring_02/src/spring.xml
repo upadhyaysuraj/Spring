@@ -8,7 +8,7 @@
 	<alias name="tri" alias="tri-alias_2"/>
 	
 	
-	<bean id="tri-point-list" class="org.suraj.model.TrianglePointList" scope="prototype">
+	<bean id="tri-point-list" class="org.suraj.model.TrianglePointList">
 		<property name="points">
 			<list>
 				<ref bean="zeroPoint"/>
@@ -18,7 +18,7 @@
 		</property>
 	</bean>
 
-	<bean id="zeroPoint" class="org.suraj.model.Point">
+	<bean id="zeroPoint" class="org.suraj.model.Point" scope="prototype">
 		<property name="x" value="0"/>
 		<property name="y" value="0"/>
 	</bean>

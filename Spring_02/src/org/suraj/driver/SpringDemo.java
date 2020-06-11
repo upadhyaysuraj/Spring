@@ -2,6 +2,7 @@ package org.suraj.driver;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.suraj.model.Point;
 import org.suraj.model.Triangle;
 import org.suraj.model.TrianglePointList;
 
@@ -18,16 +19,19 @@ public class SpringDemo
 		Triangle t2 = (Triangle) (myFactory.getBean("tri-alias_1"));
 		System.out.println(t2);
 		
-		t1.getP1().setX(5);
 		
 		Triangle t3 = (Triangle) (myFactory.getBean("tri-alias_2"));
 		System.out.println(t3);
 		
 		TrianglePointList t4 = (TrianglePointList) (myFactory.getBean("tri-point-list"));
 		System.out.println(t4);
+		t4.getPoints().set(0, new Point(5, 5));
 		
-		System.out.println(t2);
 		
+		TrianglePointList t5 = (TrianglePointList) (myFactory.getBean("tri-point-list"));
+		System.out.println(t5);
+
+				
 		((ClassPathXmlApplicationContext)myFactory).close();
 	}
 	
