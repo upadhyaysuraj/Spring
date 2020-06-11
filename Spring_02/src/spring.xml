@@ -2,28 +2,38 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans>
-	
 	<bean id="tri" class="org.suraj.model.Triangle" name="tri-alias_1" scope="prototype">
 		<property name="p1" ref="zeroPoint"/>
-		<property name="p2">
-			<bean class="org.suraj.model.Point" scope="prototype">
-				<property name="x" value="10"/>
-				<property name="y" value="20"/>
-			</bean>
-		</property>
-		<property name="p3">
-			<bean class="org.suraj.model.Point" scope="prototype">
-				<property name="x" value="-40"/>
-				<property name="y" value="-30"/>
-			</bean>
+		<property name="p2" ref="p2"/>
+		<property name="p3" ref="p3"/>
+	</bean>
+	<alias name="tri" alias="tri-alias_2"/>
+	
+	
+	<bean id="tri-point-list" class="org.suraj.model.TrianglePointList" scope="prototype">
+		<property name="points">
+			<list>
+				<ref bean="zeroPoint"/>
+				<ref bean="p2"/>
+				<ref bean="p3"/>
+			</list>
 		</property>
 	</bean>
-	
-	<alias name="tri" alias="tri-alias_2"/>
 
 	<bean id="zeroPoint" class="org.suraj.model.Point" scope="prototype">
 		<property name="x" value="0"/>
 		<property name="y" value="0"/>
 	</bean>
+	
+	<bean id="p2" class="org.suraj.model.Point" scope="prototype">
+		<property name="x" value="10"/>
+		<property name="y" value="20"/>
+	</bean>
+	
+	<bean id="p3" class="org.suraj.model.Point" scope="prototype">
+		<property name="x" value="-40"/>
+		<property name="y" value="-30"/>
+	</bean>
+	
 </beans>
 
