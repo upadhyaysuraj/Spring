@@ -14,6 +14,12 @@ public class SpringDemo
 		Triangle t1 = (Triangle) (myFactory.getBean("tri"));
 		System.out.println(t1);
 		
+		Triangle t2 = (Triangle) (myFactory.getBean("tri-alias_1"));
+		System.out.println(t2);
+		
+		Triangle t3 = (Triangle) (myFactory.getBean("tri-alias_2"));
+		System.out.println(t3);
+		
 		
 		((ClassPathXmlApplicationContext)myFactory).close();
 	}

@@ -3,7 +3,7 @@
 
 <beans>
 	
-	<bean id="tri" class="org.suraj.model.Triangle" scope="prototype">
+	<bean id="tri" class="org.suraj.model.Triangle" name="tri-alias_1" scope="prototype">
 		<property name="p1" ref="zeroPoint"/>
 		<property name="p2">
 			<bean class="org.suraj.model.Point" scope="prototype">
@@ -18,6 +18,8 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<alias name="tri" alias="tri-alias_2"/>
 
 	<bean id="zeroPoint" class="org.suraj.model.Point" scope="prototype">
 		<property name="x" value="0"/>
