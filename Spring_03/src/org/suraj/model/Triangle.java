@@ -6,10 +6,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-public class Triangle implements ApplicationContextAware, InitializingBean, DisposableBean
+public class Triangle implements InitializingBean, DisposableBean
 {
 	private Point p1, p2, p3;
-	private ApplicationContext context;
 	
 	static
 	{
@@ -67,13 +66,6 @@ public class Triangle implements ApplicationContextAware, InitializingBean, Disp
 	}
 
 	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException
-	{
-		System.out.println("application context set!");
-		this.context = applicationContext;
-	}
-
-	@Override
 	public void afterPropertiesSet() throws Exception
 	{
 		System.out.println("Triangle object's props are set!");
@@ -83,5 +75,15 @@ public class Triangle implements ApplicationContextAware, InitializingBean, Disp
 	public void destroy() throws Exception
 	{
 		System.out.println("Triangle object is being destroyed!");
+	}
+	
+	public void myInit()
+	{
+		System.out.println("My default Init() is called!");
+	}
+	
+	public void myCleanUp()
+	{
+		System.out.println("My default clean up is called!");
 	}
 }
