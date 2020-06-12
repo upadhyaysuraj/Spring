@@ -17,21 +17,7 @@
 			</list>
 		</property>
 	</bean>
-
-	<bean id="zeroPoint" class="org.suraj.model.Point" scope="prototype">
-		<property name="x" value="0"/>
-		<property name="y" value="0"/>
-	</bean>
 	
-	<bean id="p2" class="org.suraj.model.Point" scope="prototype">
-		<property name="x" value="10"/>
-		<property name="y" value="20"/>
-	</bean>
-	
-	<bean id="p3" class="org.suraj.model.Point" scope="prototype">
-		<property name="x" value="-40"/>
-		<property name="y" value="-30"/>
-	</bean>
-	
+	<import resource="helper.xml"/>
 </beans>
 
