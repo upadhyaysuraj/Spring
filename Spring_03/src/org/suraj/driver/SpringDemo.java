@@ -1,10 +1,7 @@
 package org.suraj.driver;
 
-import org.springframework.beans.factory.support.AbstractBeanFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.suraj.model.Point;
 import org.suraj.model.Triangle;
 import org.suraj.model.TrianglePointList;
 

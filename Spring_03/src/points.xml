@@ -9,12 +9,16 @@
 	</bean>
 	
 	<bean id="p2" class="org.suraj.model.Point" scope="prototype">
-		<property name="x" value="10"/>
-		<property name="y" value="20"/>
+		<property name="x" value="${A}"/>
+		<property name="y" value="${B}"/>
 	</bean>
 	
 	<bean id="p3" class="org.suraj.model.Point" scope="prototype">
 		<property name="x" value="-40"/>
 		<property name="y" value="-30"/>
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="props.properties"/>
 	</bean>
 </beans>
