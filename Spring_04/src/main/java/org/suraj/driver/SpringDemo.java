@@ -14,7 +14,7 @@ public class SpringDemo
 		AbstractApplicationContext myFactory = new AnnotationConfigApplicationContext("org.suraj");
 		myFactory.registerShutdownHook();
 		
-		Shape shape = (Shape) (myFactory.getBean("tri"));
+		Shape shape = (Shape) (myFactory.getBean("triangle"));
 		((Triangle)shape).getP1().setX(3);
 		System.out.println(shape);
 		shape.draw();
