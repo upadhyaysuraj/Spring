@@ -17,5 +17,7 @@
 	</bean>
 	
 	<import resource="points.xml"/>
+	
+	<bean class="org.suraj.service.PostPreProcessing"/>
 </beans>
 
