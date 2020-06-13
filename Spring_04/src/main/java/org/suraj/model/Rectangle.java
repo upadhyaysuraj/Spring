@@ -3,21 +3,14 @@ package org.suraj.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("tri")
-public class Triangle implements Shape
+@Component("rec")
+public class Rectangle implements Shape
 {
 	@Autowired
-	private Point p1, p2, p3;
+	private Point p1, p2, p3, p4;
 	
-	public Triangle()
+	public Rectangle()
 	{}
-
-	public Triangle(Point p1, Point p2, Point p3)
-	{
-		this.p1 = p1;
-		this.p2 = p2;
-		this.p3 = p3;
-	}
 
 	public Point getP1()
 	{
@@ -48,18 +41,27 @@ public class Triangle implements Shape
 	{
 		this.p3 = p3;
 	}
+
+	public Point getP4()
+	{
+		return p4;
+	}
+
+	public void setP4(Point p4)
+	{
+		this.p4 = p4;
+	}
 	
 	@Override
 	public String toString()
 	{
-		String str = "Tri: [" + this.p1 + ", " + this.p2 + ", " + this.p3 + "]";
-		
+		String str = "Rec: [" + this.p1 + ", " + this.p2 + ", " + 
+										this.p3 + ", " + this.p4 + "]";
 		return str;
 	}
 
 	public void draw()
 	{
-		System.out.println("Triangle: draw()");
+		System.out.println("Rectangle: draw()");
 	}
-
 }
