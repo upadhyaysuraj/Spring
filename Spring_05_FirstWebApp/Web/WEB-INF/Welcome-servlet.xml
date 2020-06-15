@@ -6,9 +6,7 @@
    http://www.springframework.org/schema/context 
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-<!-- 	<bean id="HandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" /> -->
-	
-	<bean name="/" class="org.suraj.controller.WelcomeController"/>
+	<context:component-scan base-package="org.suraj.controller"/>	
 
 	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
 	   <property name = "prefix" value = "/WEB-INF/jsp/" />
