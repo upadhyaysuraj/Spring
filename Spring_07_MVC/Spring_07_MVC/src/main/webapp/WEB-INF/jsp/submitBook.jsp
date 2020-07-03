@@ -7,9 +7,7 @@
 <title>Book inserted</title>
 </head>
 <body>
-${heading}
-
-Book Successfully inserted!! <br><br>
+${heading}<br><br>
 Book Details:<br>
 ID: ${book.bookId}<br>
 Name: ${book.bookName}<br>

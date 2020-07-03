@@ -9,8 +9,6 @@
 <body>
 Welcome ${username}.
 
-<div align="center">
-
 	<form method="post" action="/Spring_07_MVC/submitBook">
 			<h3>${heading}</h3> 
 		ID: <input type="number" name="bookId"> <br>
@@ -18,7 +16,6 @@ Welcome ${username}.
 		Author: <input type="text" name="bookAuthor"><br>
 		<button type="submit">Submit</button>
 	</form>
-</div>
 
 <form action="/Spring_07_MVC/login">
 	<button type="submit">Logout</button>

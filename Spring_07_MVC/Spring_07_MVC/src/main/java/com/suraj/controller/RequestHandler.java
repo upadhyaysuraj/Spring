@@ -19,32 +19,22 @@ public class RequestHandler
 	{
 		ModelAndView model = new ModelAndView("/welcome");
 		model.addObject("username", username);
+		model.addObject("heading", "Adding a book");
 		return model;
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping(value = {"/login", "/"})
 	public String logout()
 	{
 		return "login";
 	}
-	
-	@RequestMapping("/")
-	public String login()
-	{
-		return "login";
-	}
+
 	
 	@RequestMapping(value = "/submitBook", method = RequestMethod.POST)
 	public String submitBook(@ModelAttribute Book bk, Model model)
 	{
 		model.addAttribute("book", bk);
+		model.addAttribute("heading", "Book Successfully Inserted!!");
 		return "submitBook";
-	}
-	
-	@ModelAttribute
-	public void header(Model model)
-	{
-		System.out.println("Heading method");
-		model.addAttribute("heading", "Adding a book");
 	}
 }
