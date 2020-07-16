@@ -13,11 +13,10 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement
 @ComponentScan(basePackages = "com.java.spring")
-@PropertySource(value= {"classpath:application.properties"})
+@PropertySource(value={"classpath:application.properties"})
 public class AppConfig
-{
+{	
 	@Autowired
 	private Environment env;
 	
@@ -27,7 +26,7 @@ public class AppConfig
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName(env.getProperty("jdbc.driverClassName"));
 		ds.setUrl(env.getProperty("jdbc.url"));
-		ds.setUsername(env.getProperty("jdbc.url"));
+		ds.setUsername(env.getProperty("jdbc.username"));
 		ds.setPassword(env.getProperty("jdbc.password"));
 		return ds;
 	}

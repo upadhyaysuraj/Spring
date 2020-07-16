@@ -14,9 +14,10 @@ public class ProductController
 	private ProductService productService;
 	
 	@GetMapping("/getProduct/{id}")
-	public Product getProduct(@PathVariable int id)
+	public String getProduct(@PathVariable int id)
 	{
 		Product p = productService.getProductByID(id);
-		return p;
+		System.out.println("Product: " + p);
+		return "index.jsp";
 	}
 }

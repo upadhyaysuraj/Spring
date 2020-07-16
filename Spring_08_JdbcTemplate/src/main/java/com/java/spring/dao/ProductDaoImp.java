@@ -3,6 +3,7 @@ package com.java.spring.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -10,11 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.java.spring.model.Product;
 
 @Repository
+@Qualifier("productDAO")
 public class ProductDaoImp implements ProductDAO
 {
 	@Autowired
 	private JdbcTemplate jdbcTemplate; 
-	
 	private String getProductById = "Select * From PRODUCT where PID=?";
 	private String deleteProduct = "Delete From PRODUCT where PID=?";
 	private String updateProduct = "Update PRODUCT Set PNAME=?, PRICE=?, QTY=? where PID=?";

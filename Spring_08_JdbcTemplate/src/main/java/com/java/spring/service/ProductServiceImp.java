@@ -2,11 +2,13 @@ package com.java.spring.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.java.spring.dao.ProductDAO;
 import com.java.spring.model.Product;
 
 @Service
+@Qualifier("productService")
 public class ProductServiceImp implements ProductService
 {
 	@Autowired
