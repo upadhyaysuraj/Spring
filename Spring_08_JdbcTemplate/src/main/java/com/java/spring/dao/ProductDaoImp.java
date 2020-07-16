@@ -25,7 +25,7 @@ public class ProductDaoImp implements ProductDAO
 		
 	public Product getProductByID(int id)
 	{
-		Product p = (Product) jdbcTemplate.query(getProductById, new Object[] {id}, new BeanPropertyRowMapper<Product>(Product.class));
+		Product p = (Product) jdbcTemplate.queryForObject(getProductById, new Object[] {id}, new BeanPropertyRowMapper<Product>(Product.class));
 		
 		return p;
 	}
