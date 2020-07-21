@@ -1,9 +1,12 @@
 package com.java.spring.config;
 
 
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
+
+import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,9 +16,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -43,7 +44,8 @@ public class AppConfig
 	}
 	
 	@Bean
-   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+   public LocalContainerEntityManagerFactoryBean entityManagerFactory() 
+	{
       LocalContainerEntityManagerFactoryBean em 
         = new LocalContainerEntityManagerFactoryBean();
       
@@ -54,6 +56,13 @@ public class AppConfig
  
       return em;
    }
+	
+	@Bean(initMethod="start",destroyMethod="stop")
+	public Server h2WebConsonleServer () throws SQLException 
+	{
+		Server s = Server.createWebServer("-web","-webAllowOthers","-webDaemon","-webPort", "8082");
+		return s;
+	}
 	
 	@Bean
 	public PlatformTransactionManager transactionManager() {
@@ -71,9 +80,9 @@ public class AppConfig
 	private Properties properties()
 	{
 		Properties p = new Properties();
-//		p.setProperty("hibernate.hbm2ddl.auto", "update");
-//		p.setProperty("hibernate.show_sql", "true");
-//	   p.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+		p.setProperty("hibernate.hbm2ddl.auto", "create");
+		p.setProperty("hibernate.show_sql", "true");
+	   p.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		return p;
 	}
 }
