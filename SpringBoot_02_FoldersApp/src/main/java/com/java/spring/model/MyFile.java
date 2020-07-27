@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 
 @Entity(name="File")
 public class MyFile
@@ -16,7 +18,9 @@ public class MyFile
 	private int id;
 	private String name;
 	private Blob file;
+	@CreationTimestamp
 	private Date dateAdded;
+	private String folderName;
 	
 	public String getName()
 	{
@@ -61,5 +65,15 @@ public class MyFile
 	public String toString()
 	{
 		return this.name;
+	}
+
+	public String getFolderName()
+	{
+		return folderName;
+	}
+
+	public void setFolderName(String folderName)
+	{
+		this.folderName = folderName;
 	}
 }

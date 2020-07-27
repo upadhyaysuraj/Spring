@@ -1,8 +1,10 @@
 package com.java.spring.service;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.java.spring.dao.FileDao;
 import com.java.spring.dao.FolderDao;
 import com.java.spring.model.Folder;
 import com.java.spring.model.MyFile;
@@ -12,22 +14,23 @@ public class FolderServiceImp implements FolderService
 {
 	@Autowired
 	private FolderDao folderDao;
+	@Autowired
+	private FileDao fileDao;
 
 	@Override
-	public Collection<MyFile> getAllFiles(String folderName)
+ 	public Set<String> getAllFiles(String folderName)
 	{
 		Folder folder = folderDao.findByName(folderName);
 		
 		if(folder != null)
 		{
-			return folder.getFiles().values();
+			return folder.getFiles();
 		}
-		
 		return null;
 	}
 
 	@Override
-	public Collection<Folder> getAllFolders()
+	public List<Folder> getAllFolders()
 	{
 		return folderDao.findAll();		
 	}
@@ -36,6 +39,12 @@ public class FolderServiceImp implements FolderService
 	public Folder getFolderById(int folderId)
 	{
 		return folderDao.findById(folderId).orElse(null);
+	}
+	
+	@Override
+	public Folder getFolderByName(String folderName)
+	{
+		return folderDao.findByName(folderName);
 	}
 
 	@Override
@@ -50,10 +59,18 @@ public class FolderServiceImp implements FolderService
 	}
 
 	@Override
-	public boolean deleteFolder(Folder folder)
+	public boolean deleteFolder(String folderName)
 	{
-		if(folder != null && folderDao.findByName(folder.getName()) != null)
+		if(folderName != null) return false;
+		
+		Folder folder = folderDao.findByName(folderName);
+		if(folder != null)
 		{
+			for(MyFile file : fileDao.findByFolderName(folderName))
+			{
+				fileDao.delete(file);
+			}
+			
 			folderDao.delete(folder);
 			return true;
 		}
@@ -61,39 +78,47 @@ public class FolderServiceImp implements FolderService
 	}
 
 	@Override
-	public boolean addFile(Folder folder, MyFile file)
+	public boolean addFile(String folderName, MyFile file)
 	{
-		if(folder != null && file != null)
+		if(folderName != null && file != null)
 		{
-			Folder temp = getFolderById(folder.getId());
-			if(temp != null)
+			Folder folder = folderDao.findByName(folderName);
+			if(folder != null)
 			{
-				
+				file.setFolderName(folderName);				
+				if(folder.addFile(file.getName()))
+				{
+					folderDao.save(folder);
+					fileDao.save(file);
+					return true;
+				}
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public boolean deleteFile(Folder folder, MyFile file)
+	public boolean deleteFile(String folderName, String fileName)
 	{
-		// TODO Auto-generated method stub
+		MyFile file = fileDao.findByFolderNameAndName(folderName, fileName);
+		if(file != null)
+		{
+			fileDao.delete(file);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public MyFile getFileById(Folder folder, int fileId)
+	public MyFile getFileByName(String folderName, String fileName)
 	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MyFile getFileByName(Folder folder, int fileName)
-	{
-		// TODO Auto-generated method stub
-		return null;
+		return fileDao.findByFolderNameAndName(folderName, fileName);
 	}
 	
+	@Override
+	public Set<MyFile> getAllFolderFiles(String folderName)
+	{
+		return fileDao.findByFolderName(folderName);
+	}
 	
 }

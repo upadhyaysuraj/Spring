@@ -1,12 +1,15 @@
 package com.java.spring.model;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Folder
@@ -15,11 +18,16 @@ public class Folder
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String name;
+	@CreationTimestamp
 	private Date dateCreated;
 	private int totalFiles;
-	@OneToMany
-	private Map<String, MyFile> files;
+	@OneToMany (cascade = CascadeType.ALL)
+	private Set<String> files;
 	
+	public Folder()
+	{
+		this.files = new HashSet<String>();
+	}
 	
 	public int getId()
 	{
@@ -61,14 +69,44 @@ public class Folder
 		this.totalFiles = totalFiles;
 	}
 	
-	public Map<String, MyFile> getFiles()
+	public Set<String> getFiles()
 	{
 		return files;
 	}
 	
-	public void setFiles(Map<String, MyFile> files)
+	public void setFiles(Set<String> files)
 	{
 		this.files = files;
+	}
+	
+	/*
+	 * 
+	 * Need to also add file obj the database table
+	 * 
+	 */
+	public boolean addFile(String fileName)
+	{
+		if(files.add(fileName))
+		{
+			totalFiles++;
+			return true;
+		}
+		return false;
+	}
+	
+	/*
+	 * 
+	 * Need to also remove file obj the database table
+	 * 
+	 */
+	public boolean deleteFile(String fileName)
+	{
+		if(files.remove(fileName))
+		{
+			totalFiles--;
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

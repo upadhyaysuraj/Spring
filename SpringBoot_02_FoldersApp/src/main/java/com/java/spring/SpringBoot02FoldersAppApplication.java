@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.java.spring.model")
+@EnableJpaRepositories("com.java.spring.dao")
 public class SpringBoot02FoldersAppApplication 
 {
 	public static void main(String[] args) 

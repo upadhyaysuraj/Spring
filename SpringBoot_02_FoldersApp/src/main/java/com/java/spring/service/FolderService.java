@@ -1,30 +1,32 @@
 package com.java.spring.service;
 
-import java.util.Collection;
-
+import java.util.List;
+import java.util.Set;
 import com.java.spring.model.Folder;
 import com.java.spring.model.MyFile;
 
 public interface FolderService
 {
 	
-	Collection<MyFile> getAllFiles(String folderName);
+	Set<String> getAllFiles(String folderName);
 
-	Collection<Folder> getAllFolders();
+	List<Folder> getAllFolders();
 
 	Folder getFolderById(int folderId);
 	
 	boolean addFolder(Folder folder);
 	
-	boolean deleteFolder(Folder folder);
+	boolean deleteFolder(String folderName);
 	
-	boolean addFile(Folder folder, MyFile file);
+	boolean addFile(String folderName, MyFile file);
 	
-	boolean deleteFile(Folder folder, MyFile file);
-	
-	MyFile getFileById(Folder folder, int fileId);
-	
-	MyFile getFileByName(Folder folder, int fileName);
+	boolean deleteFile(String folderName, String fileName);
+		
+	MyFile getFileByName(String folderName, String fileName);
+
+	Folder getFolderByName(String folderName);
+
+	Set<MyFile> getAllFolderFiles(String folderName);
 	
 
 }
