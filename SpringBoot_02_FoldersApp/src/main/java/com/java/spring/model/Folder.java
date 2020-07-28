@@ -3,12 +3,11 @@ package com.java.spring.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -21,7 +20,7 @@ public class Folder
 	@CreationTimestamp
 	private Date dateCreated;
 	private int totalFiles;
-	@OneToMany (cascade = CascadeType.ALL)
+	@ElementCollection
 	private Set<String> files;
 	
 	public Folder()

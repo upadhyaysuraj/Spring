@@ -20,12 +20,11 @@ public class FolderServiceImp implements FolderService
 	@Override
  	public Set<String> getAllFiles(String folderName)
 	{
-		Folder folder = folderDao.findByName(folderName);
-		
-		if(folder != null)
-		{
+		Folder folder = folderDao.findFolder(folderName);
+
+		if(folder != null) 
 			return folder.getFiles();
-		}
+		
 		return null;
 	}
 
@@ -44,13 +43,13 @@ public class FolderServiceImp implements FolderService
 	@Override
 	public Folder getFolderByName(String folderName)
 	{
-		return folderDao.findByName(folderName);
+		return folderDao.findFolder(folderName);		
 	}
 
 	@Override
 	public boolean addFolder(Folder folder)
 	{
-		if(folder != null && folderDao.findByName(folder.getName()) == null)
+		if(folder != null && folderDao.findFolder(folder.getName()) == null)
 		{
 			folderDao.save(folder);
 			return true;
@@ -61,9 +60,9 @@ public class FolderServiceImp implements FolderService
 	@Override
 	public boolean deleteFolder(String folderName)
 	{
-		if(folderName != null) return false;
+		if(folderName == null) return false;
 		
-		Folder folder = folderDao.findByName(folderName);
+		Folder folder = folderDao.findFolder(folderName);		
 		if(folder != null)
 		{
 			for(MyFile file : fileDao.findByFolderName(folderName))
@@ -82,7 +81,8 @@ public class FolderServiceImp implements FolderService
 	{
 		if(folderName != null && file != null)
 		{
-			Folder folder = folderDao.findByName(folderName);
+			Folder folder = folderDao.findFolder(folderName);
+
 			if(folder != null)
 			{
 				file.setFolderName(folderName);				

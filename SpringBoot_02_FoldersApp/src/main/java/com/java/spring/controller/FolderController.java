@@ -32,7 +32,7 @@ public class FolderController
 		return folderService.addFolder(folder);
 	}
 	
-	@PostMapping("/deleteFolder")
+	@DeleteMapping("/deleteFolder")
 	public boolean deleteFolder(@RequestParam String folderName)
 	{
 		return folderService.deleteFolder(folderName);
