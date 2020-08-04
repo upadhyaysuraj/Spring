@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import org.hibernate.annotations.CreationTimestamp;
 
 
@@ -76,4 +75,15 @@ public class MyFile
 	{
 		this.folderName = folderName;
 	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(!(obj instanceof MyFile)) return false;
+		
+		MyFile temp = (MyFile) obj;
+		return temp.getName().equalsIgnoreCase(name);
+	}
+	
+	
 }

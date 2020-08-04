@@ -21,12 +21,7 @@ public class Folder
 	private Date dateCreated;
 	private int totalFiles;
 	@ElementCollection
-	private Set<String> files;
-	
-	public Folder()
-	{
-		this.files = new HashSet<String>();
-	}
+	private Set<String> files = new HashSet<String>();
 	
 	public int getId()
 	{
@@ -78,11 +73,6 @@ public class Folder
 		this.files = files;
 	}
 	
-	/*
-	 * 
-	 * Need to also add file obj the database table
-	 * 
-	 */
 	public boolean addFile(String fileName)
 	{
 		if(files.add(fileName))
@@ -93,11 +83,6 @@ public class Folder
 		return false;
 	}
 	
-	/*
-	 * 
-	 * Need to also remove file obj the database table
-	 * 
-	 */
 	public boolean deleteFile(String fileName)
 	{
 		if(files.remove(fileName))

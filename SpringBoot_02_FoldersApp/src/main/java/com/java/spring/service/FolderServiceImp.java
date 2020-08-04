@@ -104,6 +104,7 @@ public class FolderServiceImp implements FolderService
 		if(file != null)
 		{
 			fileDao.delete(file);
+			folderDao.save(folderDao.findFolder(folderName));
 			return true;
 		}
 		return false;

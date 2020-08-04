@@ -56,4 +56,10 @@ public class FolderController
 	{
 		return folderService.getAllFiles(folderName);
 	}
+	
+	@PostMapping("/{folderName}/getFile")
+	public MyFile getFile(@PathVariable String folderName, @RequestParam String fileName)
+	{
+		return folderService.getFileByName(folderName, fileName);
+	}
 }
