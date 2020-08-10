@@ -1,17 +1,14 @@
 package com.java.spring.model;
 
-import java.sql.Blob;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 @Entity
 public class MyFile
 {
 	@Id
 	private String name;
-	@Lob
-	private Blob file;
+	private String path;
 	
 	public String getName()
 	{
@@ -22,14 +19,14 @@ public class MyFile
 	{
 		this.name = name;
 	}
-	
-	public Blob getFile()
+
+	public String getPath()
 	{
-		return file;
+		return path;
 	}
-	
-	public void setFile(Blob file)
+
+	public void setPath(String path)
 	{
-		this.file = file;
+		this.path = path;
 	}
 }
