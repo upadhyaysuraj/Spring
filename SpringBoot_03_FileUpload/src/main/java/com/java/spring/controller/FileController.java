@@ -4,18 +4,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import javax.sql.rowset.serial.SerialException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.java.spring.dao.FileDao;
 import com.java.spring.model.MyFile;
 
@@ -24,48 +23,65 @@ public class FileController
 {
 	@Autowired
 	private FileDao fileDao;
+	private final String FOLDER_TO_UPLOAD = "/****/****/*****/***/";
 	
 	@PostMapping(value="/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public boolean receiveFile(@RequestParam String name, 
-			@RequestParam MultipartFile file) throws SerialException, SQLException, IOException
+			@RequestParam MultipartFile file)
 	{	
-		File dir = ResourceUtils.getFile("src/main/resources/files");
-		File newFile = new File(dir, name + ".png");
-		newFile.createNewFile();
+		MyFile temp = fileDao.findOneByName(name);
+		if(temp != null) return false;
 		
-		      
-		System.out.println("Dir Exists: " + dir.exists());
-		System.out.println("Dir path: " + dir.getAbsolutePath());
 		
-		OutputStream out = new FileOutputStream(newFile);
-		out.write(file.getBytes());
-		out.close();		
+		File dir = new File(FOLDER_TO_UPLOAD);
+		dir.mkdir();
+		File newFile = new File(dir, name);
 		
-		/*
+		OutputStream out = null;
+		try
+		{
+			newFile.createNewFile();
+			out = new FileOutputStream(newFile);
+			out.write(file.getBytes());
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			if(out != null)
+			{
+				try
+				{
+					out.close();
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	
+		
 		
 		MyFile myFile = new MyFile();
 		myFile.setName(name);
-		myFile.setPath("/files/" + name);
+		myFile.setPath(FOLDER_TO_UPLOAD + name);
 		
-		//myFile.setFile(new SerialBlob(file.getBytes()));
-		myFile.setName(name);
-		
-		*/
+		fileDao.save(myFile);
+				
 		
 		return true;
 	}
 	
 	@GetMapping(value = "/{fileName}")
-	public byte[] getFile(@PathVariable String fileName) throws IOException, SQLException
+	public String getFile(@PathVariable String fileName) throws IOException, SQLException
 	{
 		MyFile myFile = fileDao.findOneByName(fileName);
 		
 		if(myFile == null) return null;
 		
-		
-		
-		
-		return null;
+		return myFile.getPath();
 	}
 	
 }
