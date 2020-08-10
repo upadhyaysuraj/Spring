@@ -7,8 +7,6 @@ import com.java.spring.model.MyFile;
 
 public interface FolderService
 {
-	
-	Set<String> getAllFiles(String folderName);
 
 	List<Folder> getAllFolders();
 
@@ -18,7 +16,7 @@ public interface FolderService
 	
 	boolean deleteFolder(String folderName);
 	
-	boolean addFile(String folderName, MyFile file);
+	boolean addFile(String folderName, MyFile file, byte[] content);
 	
 	boolean deleteFile(String folderName, String fileName);
 		
@@ -28,5 +26,4 @@ public interface FolderService
 
 	Set<MyFile> getAllFolderFiles(String folderName);
 	
-
 }

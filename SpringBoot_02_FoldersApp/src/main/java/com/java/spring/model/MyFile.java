@@ -1,11 +1,15 @@
 package com.java.spring.model;
 
-import java.sql.Blob;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 
@@ -15,12 +19,24 @@ public class MyFile
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@Column(name = "fileName")
 	private String name;
-	private Blob file;
 	@CreationTimestamp
 	private Date dateAdded;
-	private String folderName;
+	@ManyToOne
+	@JoinColumn(name = "name")
+	private Folder parentFolder;
 	
+	public Folder getParentFolder()
+	{
+		return parentFolder;
+	}
+
+	public void setParentFolder(Folder parentFolder)
+	{
+		this.parentFolder = parentFolder;
+	}
+
 	public String getName()
 	{
 		return name;
@@ -41,16 +57,6 @@ public class MyFile
 		this.id = id;
 	}
 	
-	public Blob getFile()
-	{
-		return file;
-	}
-	
-	public void setFile(Blob file)
-	{
-		this.file = file;
-	}
-	
 	public Date getDateAdded()
 	{
 		return dateAdded;
@@ -66,24 +72,20 @@ public class MyFile
 		return this.name;
 	}
 
-	public String getFolderName()
-	{
-		return folderName;
-	}
-
-	public void setFolderName(String folderName)
-	{
-		this.folderName = folderName;
-	}
-
 	@Override
 	public boolean equals(Object obj)
 	{
-		if(!(obj instanceof MyFile)) return false;
+		if(obj.getClass() != MyFile.class) return false;
 		
 		MyFile temp = (MyFile) obj;
 		return temp.getName().equalsIgnoreCase(name);
 	}
+
 	
+	@Override
+	public int hashCode()
+	{
+		return this.name.hashCode();
+	}
 	
 }
