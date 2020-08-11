@@ -17,14 +17,14 @@ import org.hibernate.annotations.CreationTimestamp;
 public class Folder
 {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private String folderPath;
 	@CreationTimestamp
 	private Date dateCreated;
 	private int totalFiles;
-	@OneToMany(mappedBy = "parentFolder", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<MyFile> files = new HashSet<MyFile>();
 	
 	public int getId()
@@ -99,6 +99,7 @@ public class Folder
 	{
 		if(files.add(file))
 		{
+			file.setParentFolder(this.id);
 			totalFiles++;
 			return true;
 		}

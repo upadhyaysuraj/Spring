@@ -1,13 +1,12 @@
 package com.java.spring.model;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,16 +22,14 @@ public class MyFile
 	private String name;
 	@CreationTimestamp
 	private Date dateAdded;
-	@ManyToOne
-	@JoinColumn(name = "name")
-	private Folder parentFolder;
+	private int parentFolder;
 	
-	public Folder getParentFolder()
+	public int getParentFolder()
 	{
 		return parentFolder;
 	}
 
-	public void setParentFolder(Folder parentFolder)
+	public void setParentFolder(int parentFolder)
 	{
 		this.parentFolder = parentFolder;
 	}
